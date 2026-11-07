@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Life Countdown">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <title>Life Countdown</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b0d10;--card:#15191e;--text:#f4f1e8;--muted:#929aa5;--gold:#d6b36a;--line:#292f36}
+    *{box-sizing:border-box} html,body{margin:0;min-height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--text)}
+    body{min-height:100svh;display:flex;justify-content:center;padding:calc(env(safe-area-inset-top) + 26px) 20px calc(env(safe-area-inset-bottom) + 24px)}
+    main{width:min(100%,480px);display:flex;flex-direction:column}
+    header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:34px}
+    h1{font-size:15px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin:0;color:var(--muted)}
+    #today{font-size:13px;color:var(--muted)}
+    .tabs{display:grid;grid-template-columns:1fr 1fr;background:#111419;border:1px solid var(--line);border-radius:15px;padding:4px;margin-bottom:36px}
+    .tabs button{border:0;background:transparent;color:var(--muted);border-radius:11px;padding:12px;font:600 15px inherit;cursor:pointer}
+    .tabs button.active{background:var(--card);color:var(--text);box-shadow:0 1px 7px #0006}
+    .eyebrow{text-align:center;color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:.16em;margin-bottom:12px}
+    #age{font-size:76px;line-height:.95;text-align:center;font-weight:650;letter-spacing:-.06em;margin:0}
+    #targetDate{text-align:center;color:var(--muted);font-size:15px;margin:13px 0 42px}
+    .card{background:linear-gradient(145deg,#181c21,#12161a);border:1px solid var(--line);border-radius:24px;padding:28px 22px;margin-bottom:16px}
+    .label{text-align:center;font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:16px}
+    #calendar{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:8px}
+    .number{font-size:34px;font-weight:580;letter-spacing:-.04em}.unit{font-size:12px;color:var(--muted);margin-top:6px}
+    .weeks{text-align:center}.weeks #weekCount{font-size:48px;font-weight:620;letter-spacing:-.04em;color:var(--gold)}
+    .weeks .unit{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+    footer{margin-top:auto;padding-top:28px;text-align:center;color:#68717c;font-size:12px;line-height:1.5}
+    @media(max-height:700px){header{margin-bottom:20px}.tabs{margin-bottom:22px}#age{font-size:62px}#targetDate{margin-bottom:24px}.card{padding:20px}}
+  </style>
+</head>
+<body>
+<main>
+  <header><h1>Life Countdown</h1><div id="today"></div></header>
+  <nav class="tabs" aria-label="Choose countdown">
+    <button class="active" data-age="75">Age 75</button><button data-age="90">Age 90</button>
+  </nav>
+  <section aria-live="polite">
+    <div class="eyebrow">Time until</div><p id="age">75</p><div id="targetDate"></div>
+    <div class="card"><div class="label">Calendar time remaining</div><div id="calendar"></div></div>
+    <div class="card weeks"><div class="label">Total time remaining</div><div id="weekCount"></div><div class="unit">weeks</div></div>
+  </section>
+  <footer>Make the time count.<br>Dates are calculated in your current time zone.</footer>
+</main>
+<script>
+  const targets={75:new Date(2047,1,26),90:new Date(2062,1,26)};
+  let selected=Number(localStorage.getItem('countdownAge'))||75;
+  const fmtDate=d=>new Intl.DateTimeFormat(undefined,{month:'long',day:'numeric',year:'numeric'}).format(d);
+  function calendarDiff(from,to){
+    let years=to.getFullYear()-from.getFullYear(), months=to.getMonth()-from.getMonth(), days=to.getDate()-from.getDate();
+    if(days<0){months--; days+=new Date(to.getFullYear(),to.getMonth(),0).getDate()}
+    if(months<0){years--;months+=12} return {years,months,days};
+  }
+  function render(){
+    const now=new Date(),target=targets[selected],remaining=Math.max(0,target-now),diff=calendarDiff(now,target);
+    document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',Number(b.dataset.age)===selected));
+    document.getElementById('today').textContent=fmtDate(now);
+    document.getElementById('age').textContent=selected;
+    document.getElementById('targetDate').textContent=fmtDate(target);
+    document.getElementById('calendar').innerHTML=`<div><div class="number">${diff.years}</div><div class="unit">years</div></div><div><div class="number">${diff.months}</div><div class="unit">months</div></div><div><div class="number">${diff.days}</div><div class="unit">days</div></div>`;
+    document.getElementById('weekCount').textContent=(remaining/604800000).toLocaleString(undefined,{minimumFractionDigits:1,maximumFractionDigits:1});
+  }
+  document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{selected=Number(b.dataset.age);localStorage.setItem('countdownAge',selected);render()}));
+  render(); setInterval(render,60000);
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+</script>
+</body>
+</html>
