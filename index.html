@@ -1,73 +1,73 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0b0d10">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Life Countdown">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icon.svg">
-  <title>Life Countdown</title>
-  <style>
-    :root{color-scheme:dark;--bg:#0b0d10;--card:#15191e;--text:#f4f1e8;--muted:#929aa5;--gold:#d6b36a;--line:#292f36}
-    *{box-sizing:border-box} html,body{margin:0;min-height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--text)}
-    body{min-height:100svh;display:flex;justify-content:center;padding:calc(env(safe-area-inset-top) + 26px) 20px calc(env(safe-area-inset-bottom) + 24px)}
-    main{width:min(100%,480px);display:flex;flex-direction:column}
-    header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:34px}
-    h1{font-size:15px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin:0;color:var(--muted)}
-    #today{font-size:13px;color:var(--muted)}
-    .tabs{display:grid;grid-template-columns:1fr 1fr;background:#111419;border:1px solid var(--line);border-radius:15px;padding:4px;margin-bottom:36px}
-    .tabs button{border:0;background:transparent;color:var(--muted);border-radius:11px;padding:12px;font:600 15px inherit;cursor:pointer}
-    .tabs button.active{background:var(--card);color:var(--text);box-shadow:0 1px 7px #0006}
-    .eyebrow{text-align:center;color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:.16em;margin-bottom:12px}
-    #age{font-size:76px;line-height:.95;text-align:center;font-weight:650;letter-spacing:-.06em;margin:0}
-    #targetDate{text-align:center;color:var(--muted);font-size:15px;margin:13px 0 42px}
-    .card{background:linear-gradient(145deg,#181c21,#12161a);border:1px solid var(--line);border-radius:24px;padding:28px 22px;margin-bottom:16px}
-    .label{text-align:center;font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:16px}
-    #calendar{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:8px}
-    .number{font-size:34px;font-weight:580;letter-spacing:-.04em}.unit{font-size:12px;color:var(--muted);margin-top:6px}
-    .weeks{text-align:center}.weeks #weekCount{font-size:48px;font-weight:620;letter-spacing:-.04em;color:var(--gold)}
-    .weeks .unit{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
-    footer{margin-top:auto;padding-top:28px;text-align:center;color:#68717c;font-size:12px;line-height:1.5}
-    @media(max-height:700px){header{margin-bottom:20px}.tabs{margin-bottom:22px}#age{font-size:62px}#targetDate{margin-bottom:24px}.card{padding:20px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d10"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Life Countdown">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon.svg"><title>Life Countdown</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0d10;--card:#15191e;--text:#f4f1e8;--muted:#929aa5;--gold:#d6b36a;--line:#292f36;--danger:#ee8a82}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:var(--text)}
+body{min-height:100svh;display:flex;justify-content:center;padding:calc(env(safe-area-inset-top) + 22px) 20px calc(env(safe-area-inset-bottom) + 24px)}
+button,input{font:inherit}button{touch-action:manipulation}main{width:min(100%,480px);display:flex;flex-direction:column}
+header{display:grid;grid-template-columns:40px 1fr 40px;align-items:center;margin-bottom:8px}h1{text-align:center;font-size:15px;letter-spacing:.18em;text-transform:uppercase;font-weight:650;margin:0;color:var(--muted)}
+.settings{width:40px;height:40px;border:1px solid var(--line);border-radius:13px;background:var(--card);color:var(--muted);font-size:20px;cursor:pointer}
+.intro{text-align:center;color:var(--muted);font-size:13px;line-height:1.45;margin:0 auto 22px;max-width:340px}
+.tabs{display:grid;background:#111419;border:1px solid var(--line);border-radius:15px;padding:4px;margin-bottom:30px;gap:3px}
+.tabs button{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:0;background:transparent;color:var(--muted);border-radius:11px;padding:12px 6px;font-weight:650;font-size:14px;cursor:pointer}
+.tabs button.active{background:var(--card);color:var(--text);box-shadow:0 1px 7px #0006}.eyebrow{text-align:center;color:var(--gold);font-size:12px;text-transform:uppercase;letter-spacing:.16em;margin-bottom:10px}
+#targetName{font-size:54px;line-height:1;text-align:center;font-weight:650;letter-spacing:-.045em;margin:0;overflow-wrap:anywhere}#targetDate{text-align:center;color:var(--muted);font-size:15px;margin:12px 0 30px}
+.card{background:linear-gradient(145deg,#181c21,#12161a);border:1px solid var(--line);border-radius:24px;padding:25px 20px;margin-bottom:14px}.label{text-align:center;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:15px}
+#calendar{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:8px}.number{font-size:34px;font-weight:580;letter-spacing:-.04em}.unit{font-size:12px;color:var(--muted);margin-top:6px}
+.weeks{text-align:center}.weeks #weekCount{font-size:46px;font-weight:620;letter-spacing:-.04em;color:var(--gold)}.weeks .unit{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+#completed{text-align:center;color:var(--gold);font-size:22px;font-weight:650;padding:22px}footer{margin-top:auto;padding-top:25px;text-align:center;color:#68717c;font-size:11px;line-height:1.55}
+footer strong{display:block;color:var(--muted);font-size:13px;font-weight:550;margin-bottom:5px}footer cite{font-style:italic}
+dialog{width:min(calc(100% - 32px),440px);max-height:calc(100svh - 32px);overflow:auto;border:1px solid var(--line);border-radius:25px;background:#111419;color:var(--text);padding:0;box-shadow:0 24px 80px #000c}
+dialog::backdrop{background:#000a;backdrop-filter:blur(5px)}.modal{padding:25px}.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.modal h2{font-size:25px;margin:0;letter-spacing:-.025em}
+.close{border:0;background:transparent;color:var(--muted);font-size:28px;line-height:1;cursor:pointer}.modal-copy{color:var(--muted);font-size:13px;line-height:1.45;margin:0 0 22px}
+.field{margin-bottom:17px}.field label{display:block;font-size:12px;color:var(--muted);margin:0 0 7px}.field input{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--text);padding:12px 13px;outline:none}
+.field input:focus{border-color:var(--gold)}.ages{display:grid;grid-template-columns:1fr 1fr;gap:12px}.optional{border-top:1px solid var(--line);padding-top:19px;margin-top:3px}.optional-title{font-size:14px;font-weight:650;margin-bottom:5px}
+.optional-copy{font-size:12px;color:var(--muted);margin:0 0 14px}.error{min-height:18px;color:var(--danger);font-size:12px;margin:3px 0 8px}.save{width:100%;border:0;border-radius:14px;background:var(--gold);color:#17130a;padding:13px;font-weight:750;cursor:pointer}
+@media(max-height:720px){.intro{margin-bottom:14px}.tabs{margin-bottom:18px}#targetName{font-size:44px}#targetDate{margin-bottom:19px}.card{padding:19px}.number{font-size:30px}footer{padding-top:12px}}
+</style>
 </head>
-<body>
-<main>
-  <header><h1>Life Countdown</h1><div id="today"></div></header>
-  <nav class="tabs" aria-label="Choose countdown">
-    <button class="active" data-age="75">Age 75</button><button data-age="90">Age 90</button>
-  </nav>
-  <section aria-live="polite">
-    <div class="eyebrow">Time until</div><p id="age">75</p><div id="targetDate"></div>
-    <div class="card"><div class="label">Calendar time remaining</div><div id="calendar"></div></div>
-    <div class="card weeks"><div class="label">Total time remaining</div><div id="weekCount"></div><div class="unit">weeks</div></div>
-  </section>
-  <footer>Make the time count.<br>Dates are calculated in your current time zone.</footer>
+<body><main>
+<header><span></span><h1>Life Countdown</h1><button class="settings" id="settingsBtn" aria-label="Edit countdown settings">⚙︎</button></header>
+<p class="intro">A personal tool for making time visible—and using it intentionally.</p>
+<nav class="tabs" id="tabs" aria-label="Choose countdown"></nav>
+<section aria-live="polite"><div class="eyebrow">Time until</div><p id="targetName"></p><div id="targetDate"></div>
+<div id="activeCountdown"><div class="card"><div class="label">Calendar time remaining</div><div id="calendar"></div></div>
+<div class="card weeks"><div class="label">Total time remaining</div><div id="weekCount"></div><div class="unit">weeks</div></div></div>
+<div class="card" id="completed" hidden>Countdown completed</div></section>
+<footer><strong>Time is limited. Virtue is the measure.</strong>Inspired by <cite>Four Thousand Weeks</cite> and <cite>Die With Zero</cite>.<br>Dates are calculated in your current time zone.</footer>
 </main>
+<dialog id="settingsDialog"><form class="modal" id="settingsForm" novalidate>
+<div class="modal-head"><h2 id="modalTitle">Personalize your countdown</h2><button class="close" id="closeBtn" type="button" aria-label="Close settings">×</button></div>
+<p class="modal-copy">Your information stays in this browser on this device.</p>
+<div class="field"><label for="birthdate">Your birthdate</label><input id="birthdate" type="date" required></div>
+<div class="ages"><div class="field"><label for="age1">First target age</label><input id="age1" type="number" min="1" max="150" inputmode="numeric" required></div>
+<div class="field"><label for="age2">Second target age</label><input id="age2" type="number" min="1" max="150" inputmode="numeric" required></div></div>
+<div class="optional"><div class="optional-title">Optional custom countdown</div><p class="optional-copy">Enter both fields to add a third tab. Clear both to remove it.</p>
+<div class="field"><label for="customLabel">Tab label</label><input id="customLabel" type="text" maxlength="24" placeholder="e.g., Retirement"></div>
+<div class="field"><label for="customDate">Target date</label><input id="customDate" type="date"></div></div>
+<div class="error" id="formError" role="alert"></div><button class="save" type="submit">Save countdowns</button>
+</form></dialog>
 <script>
-  const targets={75:new Date(2047,1,26),90:new Date(2062,1,26)};
-  let selected=Number(localStorage.getItem('countdownAge'))||75;
-  const fmtDate=d=>new Intl.DateTimeFormat(undefined,{month:'long',day:'numeric',year:'numeric'}).format(d);
-  function calendarDiff(from,to){
-    let years=to.getFullYear()-from.getFullYear(), months=to.getMonth()-from.getMonth(), days=to.getDate()-from.getDate();
-    if(days<0){months--; days+=new Date(to.getFullYear(),to.getMonth(),0).getDate()}
-    if(months<0){years--;months+=12} return {years,months,days};
-  }
-  function render(){
-    const now=new Date(),target=targets[selected],remaining=Math.max(0,target-now),diff=calendarDiff(now,target);
-    document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',Number(b.dataset.age)===selected));
-    document.getElementById('today').textContent=fmtDate(now);
-    document.getElementById('age').textContent=selected;
-    document.getElementById('targetDate').textContent=fmtDate(target);
-    document.getElementById('calendar').innerHTML=`<div><div class="number">${diff.years}</div><div class="unit">years</div></div><div><div class="number">${diff.months}</div><div class="unit">months</div></div><div><div class="number">${diff.days}</div><div class="unit">days</div></div>`;
-    document.getElementById('weekCount').textContent=(remaining/604800000).toLocaleString(undefined,{minimumFractionDigits:1,maximumFractionDigits:1});
-  }
-  document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{selected=Number(b.dataset.age);localStorage.setItem('countdownAge',selected);render()}));
-  render(); setInterval(render,60000);
-  if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
-</script>
-</body>
-</html>
+const CONFIG_KEY='lifeCountdownConfigV2',TAB_KEY='lifeCountdownSelectedTabV2';
+const defaults={birthdate:'',age1:75,age2:90,customLabel:'',customDate:''};
+let config=loadConfig(),selected=localStorage.getItem(TAB_KEY)||'age1';
+const $=id=>document.getElementById(id);
+const parseLocalDate=value=>{const [y,m,d]=value.split('-').map(Number);return new Date(y,m-1,d)};
+const fmtDate=date=>new Intl.DateTimeFormat(undefined,{month:'long',day:'numeric',year:'numeric'}).format(date);
+function loadConfig(){try{return{...defaults,...JSON.parse(localStorage.getItem(CONFIG_KEY)||'{}')}}catch{return{...defaults}}}
+function targetForAge(age){const birth=parseLocalDate(config.birthdate),target=new Date(birth.getFullYear()+Number(age),birth.getMonth(),birth.getDate());if(birth.getMonth()===1&&birth.getDate()===29&&target.getMonth()!==1)target.setDate(28);return target}
+function countdowns(){if(!config.birthdate)return[];const items=[{id:'age1',label:`Age ${config.age1}`,target:targetForAge(config.age1)},{id:'age2',label:`Age ${config.age2}`,target:targetForAge(config.age2)}];if(config.customLabel&&config.customDate)items.push({id:'custom',label:config.customLabel,target:parseLocalDate(config.customDate)});return items}
+function calendarDiff(from,to){const start=new Date(from.getFullYear(),from.getMonth(),from.getDate());let years=to.getFullYear()-start.getFullYear(),anchor=new Date(start.getFullYear()+years,start.getMonth(),start.getDate());if(anchor>to){years--;anchor=new Date(start.getFullYear()+years,start.getMonth(),start.getDate())}let months=0;while(months<11){const next=new Date(anchor.getFullYear(),anchor.getMonth()+1,anchor.getDate());if(next>to)break;anchor=next;months++}return{years,months,days:Math.floor((new Date(to.getFullYear(),to.getMonth(),to.getDate())-anchor)/86400000)}}
+function safe(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function renderTabs(items){$('tabs').style.gridTemplateColumns=`repeat(${items.length},1fr)`;$('tabs').innerHTML=items.map(item=>`<button data-id="${item.id}" class="${item.id===selected?'active':''}">${safe(item.label)}</button>`).join('');$('tabs').querySelectorAll('button').forEach(btn=>btn.onclick=()=>{selected=btn.dataset.id;localStorage.setItem(TAB_KEY,selected);render()})}
+function render(){const items=countdowns();if(!items.length){openSettings(true);return}if(!items.some(item=>item.id===selected))selected='age1';renderTabs(items);const item=items.find(entry=>entry.id===selected),now=new Date(),end=new Date(item.target.getFullYear(),item.target.getMonth(),item.target.getDate()+1),passed=now>=end;$('targetName').textContent=item.label;$('targetDate').textContent=fmtDate(item.target);$('activeCountdown').hidden=passed;$('completed').hidden=!passed;if(!passed){const diff=calendarDiff(now,item.target);$('calendar').innerHTML=`<div><div class="number">${diff.years}</div><div class="unit">years</div></div><div><div class="number">${diff.months}</div><div class="unit">months</div></div><div><div class="number">${diff.days}</div><div class="unit">days</div></div>`;$('weekCount').textContent=(Math.max(0,item.target-now)/604800000).toLocaleString(undefined,{minimumFractionDigits:1,maximumFractionDigits:1})}}
+function openSettings(first=false){$('modalTitle').textContent=first?'Personalize your countdown':'Edit countdowns';$('closeBtn').hidden=first;$('birthdate').value=config.birthdate;$('age1').value=config.age1;$('age2').value=config.age2;$('customLabel').value=config.customLabel;$('customDate').value=config.customDate;$('formError').textContent='';if(!$('settingsDialog').open)$('settingsDialog').showModal()}
+$('settingsBtn').onclick=()=>openSettings();$('closeBtn').onclick=()=>$('settingsDialog').close();
+$('settingsForm').onsubmit=event=>{event.preventDefault();const birthdate=$('birthdate').value,age1=Number($('age1').value),age2=Number($('age2').value),customLabel=$('customLabel').value.trim(),customDate=$('customDate').value;let error='';if(!birthdate)error='Please enter your birthdate.';else if(parseLocalDate(birthdate)>new Date())error='Birthdate cannot be in the future.';else if(!Number.isInteger(age1)||!Number.isInteger(age2)||age1<1||age1>150||age2<1||age2>150)error='Enter target ages between 1 and 150.';else if(age1===age2)error='Choose two different target ages.';else if(Boolean(customLabel)!==Boolean(customDate))error='Enter both a custom label and target date, or leave both blank.';if(error){$('formError').textContent=error;return}config={birthdate,age1,age2,customLabel,customDate};localStorage.setItem(CONFIG_KEY,JSON.stringify(config));if(selected==='custom'&&!(customLabel&&customDate))selected='age1';localStorage.setItem(TAB_KEY,selected);$('settingsDialog').close();render()};
+render();setInterval(render,60000);if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');
+</script></body></html>
