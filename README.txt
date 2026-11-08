@@ -1,13 +1,19 @@
-LIFE COUNTDOWN V2 — GITHUB UPDATE
+LIFE COUNTDOWN — PRIVATE BETA 0.3
 
-This package replaces the existing Life Countdown app.
+Life Countdown is a personal reflection and planning tool inspired by
+Four Thousand Weeks and Die With Zero.
 
-Upload these four app files:
-  index.html
-  manifest.webmanifest
-  sw.js
-  icon.svg
+Version 0.3 adds:
+- Guided setup with Setup or Preview
+- Birthday, active-travel horizon and lifetime planning horizon
+- Optional named milestone
+- Research context and primary-source links
+- About, Sources, Privacy and Terms
+- Copyright and proprietary notices
+- Dormant event hooks for future analytics; no analytics service is active
+- Local-only storage of all countdown entries
 
-Version 2 adds first-run personalization, two age tabs, an optional labeled
-custom-date tab, consistent calendar and week displays, editable settings,
-local-only storage, and the approved inspiration and Stoic language.
+PROPRIETARY NOTICE
+Copyright © 2026 Albert Valencia. All rights reserved.
+No license is granted to copy, modify, distribute or create derivative works
+except as permitted by applicable law and GitHub's Terms of Service.
