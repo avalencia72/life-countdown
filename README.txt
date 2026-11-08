@@ -1,7 +1,14 @@
-LIFE COUNTDOWN — PRIVATE BETA 0.3
+THE LIFE COUNTS APP — PRIVATE BETA 0.4
 
-Life Countdown is a personal reflection and planning tool inspired by
+The Life Counts App is a personal reflection and planning tool inspired by
 Four Thousand Weeks and Die With Zero.
+
+Version 0.4 adds:
+- New Life Counts branding and installable-app name
+- Install-before-setup guidance for iPhone and other browsers
+- Native installation prompt support where available
+- Private setup-code export and import
+- No account, cloud database, cookies or analytics
 
 Version 0.3 adds:
 - Guided setup with Setup or Preview
