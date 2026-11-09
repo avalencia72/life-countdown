@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5 Private Beta — 2026-11-09
+
+- Preserved the major-tab order as Active, Lifetime, and Events.
+- Replaced the single milestone with multiple dated events.
+- Added chronological upcoming-event selection and countdowns.
+- Added event creation, editing, deletion, and a Past events archive.
+- Added automatic migration of the former milestone into Events.
+- Updated setup to accept multiple events.
+- Updated export/import for multiple events while retaining old-code compatibility.
+
 ## 0.4 Private Beta — 2026-11-07
 
 - Added install-before-setup guidance to prevent duplicate entry on iPhone.

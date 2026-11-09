@@ -1,7 +1,15 @@
-THE LIFE COUNTS APP — PRIVATE BETA 0.4
+THE LIFE COUNTS APP — PRIVATE BETA 0.5
 
 The Life Counts App is a personal reflection and planning tool inspired by
 Four Thousand Weeks and Die With Zero.
+
+Version 0.5 adds:
+- Permanent Active, Lifetime and Events tab order
+- Multiple upcoming events sorted by date
+- Add, edit and delete event management
+- Automatic Past events archive
+- Migration of the former single milestone into Events
+- Version 2 transfer codes with backward-compatible version 1 import
 
 Version 0.4 adds:
 - New Life Counts branding and installable-app name
